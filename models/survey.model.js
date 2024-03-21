@@ -8,7 +8,7 @@ class SurveyModel extends Model {
 		this.captcha = null;
 	}
 
-	async getSurvey() {
+	 getSurvey() {
 		let response_data 	    = {status: false, result: [], err: null};
 		
 		try{
@@ -19,7 +19,7 @@ class SurveyModel extends Model {
 				LIMIT 1;`
 			);
 
-			let [get_survey_result] = await this.executeQuery(get_survey_query);
+			let [get_survey_result] =  this.executeQuery(get_survey_query);
 	
 			if(get_survey_result){
 				response_data.status 	= true;
@@ -35,13 +35,13 @@ class SurveyModel extends Model {
 		return response_data;		
 	}
 
-	async createSurvey(name, dojo_location, fave_lang, comment){
+	 createSurvey(name, dojo_location, fave_lang, comment){
 		let insert_survey_query = Mysql.format(`
 				INSERT INTO surveys(surveys.name, surveys.location, surveys.favorite_language, surveys.comment)
 				VALUES ('${name}', '${dojo_location}',
 				'${fave_lang}', '${comment}');`
 			);
-		await this.executeQuery(insert_survey_query);
+		 this.executeQuery(insert_survey_query);
 	}
 
 	// supply the logic for each function:
